@@ -24,3 +24,36 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.background-primary {    
+    --background: linear-gradient(to bottom right, #FC466B, #3F5EFB) !important;    
+    background: linear-gradient(to bottom right, #FC466B, #3F5EFB) !important;    
+    height: 100% !important;
+}
+
+.background-transparent {
+    --background: rgba(158, 158, 158, 0.0) !important;        
+    --border-color: #ffffff !important;
+    --highlight-color-focused: #ffffff !important;
+    --color: #ffffff !important;
+    --highlight-color-valid: #ffffff !important;    
+}
+
+.text-title {
+    color: white;
+    font-weight: 600;
+}
+
+.input-ligth {
+    --placeholder-color: white !important;
+    --color: white !important;    
+}
+
+ion-item {
+    --background: rgba(158, 158, 158, 0.0) !important;    
+}
+
+ion-input {
+    --placeholder-color: #ffffff !important;
+    --color: #ffffff !important;
+}

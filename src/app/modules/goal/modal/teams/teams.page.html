@@ -1,0 +1,17 @@
+<ion-content scrollY="true" class="background-primary">
+  <ion-toolbar class="background-transparent">      
+    <ion-title>Seleccionar equipo</ion-title>
+    <ion-label slot="end" class="ion-margin" (click)="onDismiss(null)">Cerrar</ion-label>
+  </ion-toolbar>    
+
+  <ion-card *ngFor="let team of listTeam" (click)="onDismiss(team)">
+    <ion-item>
+      <ion-col size="3" class="ion-align-self-center">
+        <img src="{{ team.crestUrl }}" style="height: 80px !important;"/>
+      </ion-col>
+      <ion-col size="9">
+        <ion-label >{{ team.name }}</ion-label>
+      </ion-col>                        
+    </ion-item>    
+  </ion-card>
+</ion-content>

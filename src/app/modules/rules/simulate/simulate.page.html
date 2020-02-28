@@ -1,0 +1,59 @@
+<ion-content scrollY="true" class="background-primary">    
+
+  <ion-toolbar class="background-transparent">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="goals"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Simulacion</ion-title>
+  </ion-toolbar>    
+
+  <ion-card *ngFor="let rule of goal.rules" >
+    <ion-item>
+      <ion-col size="2" class="ion-align-self-center">
+        <img src="{{ rule.imgTeam }}" style="height: 80px !important;"/>
+      </ion-col>
+      <ion-col size="8">
+        <ion-label ><b>Equipo:</b> {{ rule.nameTeam }}</ion-label>
+        <ion-label ><b>Tipo de Evento:</b> {{ rule.eventType }}</ion-label>
+        <ion-label ><b>Monto ahorrado por evento:</b> {{ rule.amount }} USD</ion-label>
+      </ion-col>   
+      <ion-col size="2">
+        <ion-button slot="end" color="primary" (click)="edit(rule)">Editar</ion-button>
+      </ion-col>   
+    </ion-item> 
+    
+    <ion-card-content *ngFor="let team of listTeamIds">        
+      <div *ngIf="rule.eventType === 'Por juego'">
+        <ion-item>
+          <ion-label><b>Ahorro total:</b> {{ rule.amount * team.play.total }} USD</ion-label>
+          <ion-label><b>Total de eventos:</b> {{ team.play.total }} </ion-label>
+          <ion-label><b>Efectividad:</b> {{ rule.amount * team.play.total }} / {{ goal.amount }} - {{ (((rule.amount * team.play.total) / goal.amount) * 100).toFixed(2) }} %</ion-label>
+        </ion-item>
+        <ion-item *ngFor="let item of team.play.history">
+          <ion-label><b>JUEGO:</b> {{ rule.amount * item.quantity }} USD {{ item.msg }}</ion-label>
+        </ion-item>
+      </div>        
+      <div *ngIf="rule.eventType === 'Por victoria'">
+        <ion-item>
+          <ion-label><b>Ahorro total:</b> {{ rule.amount * team.winner.total }} USD</ion-label>
+          <ion-label><b>Total de eventos:</b> {{ team.winner.total }} </ion-label>
+          <ion-label><b>Efectividad:</b> {{ rule.amount * team.winner.total }} / {{ goal.amount }} - {{ (((rule.amount * team.winner.total) / goal.amount) * 100).toFixed(2) }} %</ion-label>
+        </ion-item>
+        <ion-item  *ngFor="let item of team.winner.history">
+          <ion-label><b>GANAR:</b> {{ rule.amount * item.quantity }} USD {{ item.msg }}</ion-label>
+        </ion-item>
+      </div>    
+      <div *ngIf="rule.eventType === 'Por cada gol'">
+        <ion-item>
+          <ion-label><b>Ahorro total:</b> {{ rule.amount * team.play.total }} USD</ion-label>
+          <ion-label><b>Total de eventos:</b> {{ team.gol.total }} </ion-label>
+          <ion-label><b>Efectividad:</b> {{ rule.amount * team.gol.total }} / {{ goal.amount }} - {{ (((rule.amount * team.gol.total) / goal.amount) * 100).toFixed(2) }} %</ion-label>
+        </ion-item>
+        <ion-item *ngFor="let item of team.gol.history">
+          <ion-label><b>GOLES:</b> {{ rule.amount * item.quantity }} USD {{ item.msg }}</ion-label>
+        </ion-item>
+      </div>            
+    </ion-card-content>
+  </ion-card>    
+
+</ion-content>

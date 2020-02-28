@@ -1,0 +1,36 @@
+<ion-content fullscreen>    
+
+  <form class="background-primary ion-padding">
+    
+    <ion-toolbar class="background-transparent">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="goals"></ion-back-button>
+      </ion-buttons>
+      <ion-title> {{ isEdit ? 'Editar Regla' : 'Crear Regla' }}</ion-title>
+    </ion-toolbar>    
+
+    <ion-item lines="full" class="background-transparent">      
+      <ion-label color="light" position="floating">Tipo de Evento</ion-label>             
+      <ion-select [(ngModel)]="rule.eventType" [ngModelOptions]="{standalone: true}" okText="Seleccionar" cancelText="Cancelar" (ionChange)="validateIfExistTeamInRules()">
+        <ion-select-option *ngFor="let eventType of listEventType" >{{ eventType }}</ion-select-option>        
+      </ion-select>
+    </ion-item>
+    
+    <ion-item lines="full" class="background-transparent" (click)="presentModal()">
+      <ion-label color="light" position="floating">Equipo</ion-label>
+      <ion-input color="light" type="text" readonly [(ngModel)]="rule.nameTeam" [ngModelOptions]="{standalone: true}"></ion-input>        
+    </ion-item>    
+
+    <ion-item lines="full" class="background-transparent">
+      <ion-label color="light" position="floating">Monto</ion-label>
+      <ion-input [(ngModel)]="rule.amount" color="light" type="number" required [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="light" expand="block" (click)="validate()"> {{ isEdit ? 'Editar' : 'Crear' }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

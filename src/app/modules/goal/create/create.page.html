@@ -1,0 +1,50 @@
+<ion-content fullscreen>    
+
+  <form class="background-primary ion-padding">
+    
+    <ion-toolbar class="background-transparent">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="goals"></ion-back-button>
+      </ion-buttons>
+      <ion-title> {{ isEdit ? 'Editar Meta' : 'Crear Meta' }}</ion-title>
+    </ion-toolbar>    
+
+    <ion-item lines="full" class="background-transparent">      
+      <ion-label color="light" position="floating">Tipo de Meta</ion-label>             
+      <ion-select [(ngModel)]="goal.goalType" [ngModelOptions]="{standalone: true}" okText="Seleccionar" cancelText="Cancelar">
+        <ion-select-option *ngFor="let goalType of listGoalType" >{{ goalType }}</ion-select-option>        
+      </ion-select>
+    </ion-item>
+    <!--
+    <ion-item lines="full" class="background-transparent" (click)="presentModal()">
+      <ion-label color="light" position="floating">Equipo</ion-label>
+      <ion-input color="light" type="text" readonly></ion-input>        
+    </ion-item>    
+    -->
+    <ion-item lines="full" class="background-transparent">
+      <ion-label color="light" position="floating">Fecha</ion-label>
+      <ion-datetime 
+        [(ngModel)]="goal.goalDate" 
+        displayFormat="YYYY-MM-DD" 
+        pickerFormat="MMMM YYYY DD" 
+        monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+        doneText="Seleccionar"
+        cancelText="Cancelar"
+        min="{{ dateMin }}" 
+        [ngModelOptions]="{standalone: true}">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full" class="background-transparent">
+      <ion-label color="light" position="floating">Monto</ion-label>
+      <ion-input [(ngModel)]="goal.amount" color="light" type="number" required [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="light" expand="block" (click)="validate()"> {{ isEdit ? 'Editar' : 'Crear' }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
